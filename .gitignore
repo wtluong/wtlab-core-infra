@@ -1,0 +1,21 @@
+# Environment files
+
+*.env
+
+# Docker data and logs
+
+data/
+logs/
+
+# Container-generated data
+
+wireguard/
+pihole/
+nginx-proxy-manager/
+homer/
+uptime-kuma/
+portainer/
+
+# Custom configurations
+
+!homer/config.yml

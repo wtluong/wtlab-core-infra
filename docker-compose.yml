@@ -1,0 +1,115 @@
+
+networks:
+  homelab:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+
+services:
+  # Container Management
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - homelab
+
+  # DNS and Ad Blocking
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "8080:80/tcp"
+    environment:
+      TZ: '${TIMEZONE}'
+      WEBPASSWORD: '${PIHOLE_PASSWORD}'
+      PIHOLE_DNS_: '8.8.8.8;8.8.4.4'
+    volumes:
+      - './pihole/etc-pihole:/etc/pihole'
+      - './pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
+    networks:
+      homelab:
+        ipv4_address: 172.20.0.10
+
+  # VPN Server
+  wireguard:
+    image: linuxserver/wireguard:latest
+    container_name: wireguard
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - SERVERURL=${WIREGUARD_SERVERURL}
+      - SERVERPORT=51820
+      - PEERS=${WIREGUARD_PEERS}
+      - PEERDNS=172.20.0.10  # Point to Pi-hole
+      - INTERNAL_SUBNET=10.13.13.0
+    volumes:
+      - './wireguard:/config'
+      - /lib/modules:/lib/modules
+    ports:
+      - 51820:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    networks:
+      - homelab
+
+  # Reverse Proxy
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+      - '81:81'
+    volumes:
+      - './nginx-proxy-manager/data:/data'
+      - './nginx-proxy-manager/letsencrypt:/etc/letsencrypt'
+    networks:
+      - homelab
+
+  # Dashboard
+  homer:
+    image: b4bz/homer:latest
+    container_name: homer
+    restart: unless-stopped
+    volumes:
+      - './homer:/www/assets'
+    ports:
+      - "8082:8080"
+    environment:
+      - INIT_ASSETS=1
+    networks:
+      - homelab
+
+  # Uptime Monitoring
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - uptime-kuma:/app/data
+    networks:
+      - homelab
+
+volumes:
+  portainer_data:
+  uptime-kuma:
