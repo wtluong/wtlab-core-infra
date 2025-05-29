@@ -17,5 +17,3 @@ uptime-kuma/
 portainer/
 
 # Custom configurations
-
-!homer/config.yml
