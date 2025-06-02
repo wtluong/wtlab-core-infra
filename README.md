@@ -14,7 +14,6 @@ echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
 echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolv.conf
 
 3. create .env file
-add stuff for duckdns ; registering online and receiving token, subdomain, + .env vars
 e.g.
 .env
 ```
