@@ -21,6 +21,26 @@ services:
     networks:
       - homelab
 
+  # Tailscale VPN Client
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: tailscale
+    command: tailscaled
+    restart: unless-stopped  
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    security_opt:
+      - apparmor:unconfined
+    environment:
+      - TS_EXTRA_ARGS=--accept-dns=false
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+      - ./tailscale/var-lib:/var/lib/tailscale
+      - ./tailscale/run:/var/run/tailscale
+    networks:
+      - homelab
+
   # DNS and Ad Blocking
   pihole:
     image: pihole/pihole:latest
@@ -86,3 +106,5 @@ services:
 volumes:
   portainer_data:
   uptime-kuma:
+  tailscale-var-lib:
+  tailscale-run:
