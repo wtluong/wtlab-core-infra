@@ -42,33 +42,6 @@ services:
       homelab:
         ipv4_address: 172.20.1.10
 
-  # VPN Server
-  wireguard:
-    image: linuxserver/wireguard:latest
-    container_name: wireguard
-    restart: unless-stopped
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
-      - SERVERURL=${WIREGUARD_SERVERURL}
-      - SERVERPORT=51820
-      - PEERS=${WIREGUARD_PEERS}
-      - PEERDNS=172.20.1.10  # Point to Pi-hole
-      - INTERNAL_SUBNET=10.13.13.0
-    volumes:
-      - './wireguard:/config'
-      - /lib/modules:/lib/modules
-    ports:
-      - 51820:51820/udp
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
-    networks:
-      - homelab
-
   # Reverse Proxy
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
