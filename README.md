@@ -23,9 +23,6 @@ TIMEZONE=America/New_York
 # Pi-hole
 PIHOLE_PASSWORD=your-secure-password-here
 
-# WireGuard
-WIREGUARD_SERVERURL=your-domain.duckdns.org
-WIREGUARD_PEERS=3
 ```
 
 4. create custom dns file for pihole and dns entries for services
@@ -45,8 +42,6 @@ configure Portainer
 ```
 1. Open: http://your-vm-ip:9000
 2. Create admin account
-3. Select "Docker Standalone"
-4. Connect to local Docker instance
 ```
 
 ### Step 2: Configure Pi-hole
@@ -58,27 +53,18 @@ configure Portainer
 5. Set as your router's DNS server (or manually on devices)
 ```
 
-### Step 3: Configure WireGuard
-```
-1. Check logs: docker compose logs wireguard
-2. QR codes will be generated in: ./wireguard/peer_xxx/
-3. Scan QR codes with WireGuard mobile app
-4. Test VPN connection
-```
-
-### Step 4: Configure Nginx Proxy Manager
+### Step 3: Configure Nginx Proxy Manager
 ```
 1. Open: http://your-vm-ip:81
 2. Default login: admin@example.com / changeme
 3. Change password immediately
-4. Set up proxy hosts for your services (optional for now)
+4. Set up proxy hosts for your services
 ```
 
 ### Step 5: Access Homer Dashboard
 ```
 1. Open: http://your-vm-ip:8082
 2. Edit config if needed: docker compose restart homer
-3. Bookmark this as your homelab homepage
 ```
 
 ### Step 6: Configure Uptime Kuma
