@@ -8,7 +8,7 @@ logs/
 # Container-generated data
 portainer/
 pihole/
-wireguard/
+tailscale/
 nginx-proxy-manager/
 uptime-kuma/
 homer/
