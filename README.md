@@ -38,13 +38,13 @@ address=/homer.local/192.168.1.xxx
 
 ### Post-Deployment Config:
 
-configure Portainer
+### Configure Portainer
 ```
 1. Open: http://your-vm-ip:9000
 2. Create admin account
 ```
 
-### Step 2: Configure Pi-hole
+### Configure Pi-hole
 ```
 1. Open: http://your-vm-ip:8080/admin
 2. Login with password from .env file
@@ -53,7 +53,7 @@ configure Portainer
 5. Set as your router's DNS server (or manually on devices)
 ```
 
-### Step 3: Configure Nginx Proxy Manager
+### Configure Nginx Proxy Manager
 ```
 1. Open: http://your-vm-ip:81
 2. Default login: admin@example.com / changeme
@@ -61,13 +61,13 @@ configure Portainer
 4. Set up proxy hosts for your services
 ```
 
-### Step 5: Access Homer Dashboard
+### Access Homer Dashboard
 ```
 1. Open: http://your-vm-ip:8082
 2. Edit config if needed: docker compose restart homer
 ```
 
-### Step 6: Configure Uptime Kuma
+### Configure Uptime Kuma
 ```
 1. Open: http://your-vm-ip:3001
 2. Create admin account
