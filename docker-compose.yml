@@ -84,6 +84,26 @@ services:
     networks:
       - homelab
 
+  # Secure VPN (Tailscale)
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: tailscale
+    hostname: tailscale-wtlab
+    restart: unless-stopped
+    network_mode: "host"   # Required so Tailscale can configure networking
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun   # Needed for networking
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      TS_AUTHKEY: "${TAILSCALE_AUTHKEY}"   # Generate from https://login.tailscale.com/admin/settings/keys
+      TS_STATE_DIR: "/var/lib/tailscale"
+      TS_EXTRA_ARGS: "--advertise-exit-node --accept-dns=true" # Optional: makes your server usable as an exit node
+
+
 volumes:
   portainer_data:
   uptime-kuma:
+  tailscale-state:
