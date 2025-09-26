@@ -130,7 +130,16 @@ address=/homer.local/192.168.1.xxx
    - Pi-hole: HTTP monitor on port 8080
    - Nginx PM: HTTP monitor on port 81
 ```
-
+  
 ## Roadmap
 
----
+- [x] [Core Infrastructure](https://github.com/wtluong/wtlab-core-infra/edit/main/README.md#overview)
+   - [ ] Automation / .env variables for less manual setup
+   - [ ] Backup Strategy
+- [ ] [Monitor Stack](https://github.com/wtluong/wtlab-monitor-stack)
+- [ ] Media Stack - **Planning**
+- [ ] Ansible for VM Management - **Future expansion**
+- [ ] Terraform for VM Deployment - **Future expansion**
+- [ ] Homelab Expansion - **Future expansion**
+   - [ ] NAS - Media & Backup Storage 
+   - [ ] Second NUC - High Availability
