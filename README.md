@@ -4,13 +4,13 @@
 
 ### Table of Contents
 
-- [Overview](https://github.com/wtluong/wtlab-core-infra/edit/main/README.md#overview)
-- [Components](https://github.com/wtluong/wtlab-core-infra/edit/main/README.md#components)
-- [Setup](https://github.com/wtluong/wtlab-core-infra/edit/main/README.md#setup)
-  - [Prerequisites](https://github.com/wtluong/wtlab-core-infra/edit/main/README.md#prerequisites)
-  - [Deployment](https://github.com/wtluong/wtlab-core-infra/edit/main/README.md#deployment)
-  - [Post-Deployment Config](https://github.com/wtluong/wtlab-core-infra/edit/main/README.md#post-deployment-config)
-- [Roadmap](https://github.com/wtluong/wtlab-core-infra/edit/main/README.md#roadmap)
+- [Overview](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#overview)
+- [Components](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#components)
+- [Setup](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#setup)
+  - [Prerequisites](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#prerequisites)
+  - [Deployment](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#deployment)
+  - [Post-Deployment Config](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#post-deployment-config)
+- [Roadmap](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#roadmap)
 
 ## Components
 
@@ -133,7 +133,7 @@ address=/homer.local/192.168.1.xxx
   
 ## Roadmap
 
-- [x] [Core Infrastructure](https://github.com/wtluong/wtlab-core-infra/edit/main/README.md#overview)
+- [x] [Core Infrastructure](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#overview)
    - [ ] Automation / .env variables for less manual setup
    - [ ] Backup Strategy
 - [ ] [Monitor Stack](https://github.com/wtluong/wtlab-monitor-stack)
