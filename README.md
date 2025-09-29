@@ -14,14 +14,21 @@
 
 ## Components
 
+### Hardware
+- x1 Lenovo Thinkcentre M700
+   - CPU: i5 @ 2.50GHz
+   - RAM: 32GB
+   - SSD: 1TB
+
+
 ### Core Infrastructure: wtlab-core-infra
 
-- Portainer
-- Pi-hole
-- Nginx Proxy Manager
-- Homer
-- Uptime Kuma
-- Tailscale
+- [Portainer](https://www.portainer.io/)
+- [Pi-hole](https://pi-hole.net/)
+- [Nginx Proxy Manager](https://nginxproxymanager.com/)
+- [Homer](https://github.com/bastienwirtz/homer)
+- [Uptime Kuma](https://github.com/louislam/uptime-kuma)
+- [Tailscale](https://tailscale.com/)
 
 ### Monitor Stack: [wtlab-monitor-stack](https://github.com/wtluong/wtlab-monitor-stack)
 
