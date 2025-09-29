@@ -16,7 +16,7 @@ Scalable and portable homelab setup split into 3 VMs/repos utilizing docker comp
 - [Overview](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#overview)
 - [Components](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#components)
   - [Hardware](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#hardware)
-    - [Servers](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file##servers)
+    - [Servers](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#servers)
     - [Storage](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#storage)
     - [Networking](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#networking)
     - [Other](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#other)
