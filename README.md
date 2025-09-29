@@ -2,10 +2,19 @@
 
 ## Overview
 
+This project serves as documentation and the journey for my homelab setup; it will be continuously WIP as this lab will be for both personal use and learning new skills.
+
+Currently, this homelab is currently built on a NUC running vSphere; tentatively, the expansion of this project will include adding a NAS for storage and additional NUC(s) for redundancy. This setup features 3 different repos, segmenting each stack from one another with the only dependency being the core infrastructure stack (this repo). 
+
 ### Table of Contents
 
 - [Overview](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#overview)
 - [Components](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#components)
+  - [Hardware](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#hardware)
+  - [Repositories](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#repositories)
+    - [Core Infrastructure](https://github.com/wtluong/wtlab-core-infra/tree/main#core-infrastructure-wtlab-core-infra)
+    - [Monitor Stack](https://github.com/wtluong/wtlab-core-infra/tree/main#monitor-stack-wtlab-monitor-stack)
+    - [Media Stack](https://github.com/wtluong/wtlab-core-infra/tree/main?tab=readme-ov-file#media-stack-wtlab-media-stack)
 - [Setup](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#setup)
   - [Prerequisites](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#prerequisites)
   - [Deployment](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#deployment)
@@ -15,13 +24,31 @@
 ## Components
 
 ### Hardware
-- x1 Lenovo Thinkcentre M700
+
+#### Servers
+
+- Lenovo Thinkcentre M700
    - CPU: i5 @ 2.50GHz
    - RAM: 32GB
    - SSD: 1TB
+      - Running vSphere (need to check version #)
 
+#### Storage
 
-### Core Infrastructure: wtlab-core-infra
+- **Future Expansion**
+
+#### Networking
+
+- xFinity WiFi Gateway
+   - currently locked in using plan due to cheaper rates using their router vs own router, unfortunately restricts a lot of homelab capabilities e.g. segmented VLANs, setting custom DNS, port forwarding due to technical issues with the device; tentatively want to replace once on a new WiFi plan
+  
+#### Other
+
+- Leaving this category for additional appliances that might not fit under other categories
+
+### Repositories
+
+#### Core Infrastructure: wtlab-core-infra
 
 - [Portainer](https://www.portainer.io/)
 - [Pi-hole](https://pi-hole.net/)
@@ -30,7 +57,7 @@
 - [Uptime Kuma](https://github.com/louislam/uptime-kuma)
 - [Tailscale](https://tailscale.com/)
 
-### Monitor Stack: [wtlab-monitor-stack](https://github.com/wtluong/wtlab-monitor-stack)
+#### Monitor Stack: [wtlab-monitor-stack](https://github.com/wtluong/wtlab-monitor-stack)
 
 - Prometheus
    - Alertmanager
@@ -40,7 +67,8 @@
    - Promtail
 - Grafana
 
-### Media Stack: wtlab-media-stack - Planned
+#### Media Stack: wtlab-media-stack
+- Currently Planning
 
 ## Setup
 
