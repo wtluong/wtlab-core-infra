@@ -4,13 +4,22 @@
 
 This project serves as documentation and the journey for my homelab setup; it will be continuously WIP as this lab will be for both personal use and learning new skills.
 
-Currently, this homelab is currently built on a NUC running vSphere; tentatively, the expansion of this project will include adding a NAS for storage and additional NUC(s) for redundancy. This setup features 3 different repos, segmenting each stack from one another with the only dependency being the core infrastructure stack (this repo). 
+Currently, this homelab is currently built on a NUC running vSphere; tentatively, the expansion of this project will include adding a NAS for storage and additional NUC(s) for redundancy. This setup features using 3 different VMs / repos all using docker compose, segmenting each stack from one another with the only dependency being the core infrastructure stack (this current repo). 
+
+The goal of this setup is to be both scalable and portable; inspired by similar setups, I will be using NUCs and smaller smart switches so that this homelab can be setup anywhere without needing a large dedicated space (+reduced noise and power consumption).
+
+#### TLDR:
+Scalable and portable homelab setup split into 3 VMs/repos utilizing docker compose, all dependent on the current repo which is the core infrastructure
 
 ### Table of Contents
 
 - [Overview](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#overview)
 - [Components](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#components)
   - [Hardware](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#hardware)
+    - [Servers](https://github.com/wtluong/wtlab-core-infra/blob/main/README.md#servers)
+    - [Storage](https://github.com/wtluong/wtlab-core-infra/blob/main/README.md#storage)
+    - [Networking](https://github.com/wtluong/wtlab-core-infra/blob/main/README.md#networking)
+    - [Other](https://github.com/wtluong/wtlab-core-infra/blob/main/README.md#other)
   - [Repositories](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#repositories)
     - [Core Infrastructure](https://github.com/wtluong/wtlab-core-infra/tree/main#core-infrastructure-wtlab-core-infra)
     - [Monitor Stack](https://github.com/wtluong/wtlab-core-infra/tree/main#monitor-stack-wtlab-monitor-stack)
@@ -31,7 +40,16 @@ Currently, this homelab is currently built on a NUC running vSphere; tentatively
    - CPU: i5 @ 2.50GHz
    - RAM: 32GB
    - SSD: 1TB
-      - Running vSphere (need to check version #)
+   - OS: vSphere (need to check version #)
+
+| Virtual Machine | Repository / Docker Compose Stack | OS | CPU | RAM | STORAGE
+|:--------------- | :-------------------------------: | -- | --- | --- | ------ |
+| prod-core-01 | wtlab-core-infra |
+| prod-monitor-01 | [monitor-stack](https://github.com/wtluong/wtlab-monitor-stack) |
+| prod-media-01 | media-stack |
+     
+The first NUC of this project, depending on the direction of this project this will likely be part of a NUC cluster.
+
 
 #### Storage
 
