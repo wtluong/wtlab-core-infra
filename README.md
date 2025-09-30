@@ -4,7 +4,7 @@
 
 This project serves as documentation and the journey for my homelab setup; it will be continuously WIP as this lab will be for both personal use and learning new skills.
 
-Currently, this homelab is currently built on a NUC running vSphere; tentatively, the expansion of this project will include adding a NAS for storage and additional NUC(s) for redundancy. This setup features using 3 different VMs / repos all using docker compose, segmenting each stack from one another with the only dependency being the core infrastructure stack (this current repo). 
+Currently, this homelab is currently built on a NUC running VMware ESXi 8; tentatively, the expansion of this project will include adding a NAS for storage and additional NUC(s) for redundancy. This setup features using 3 different VMs / repos all using docker compose, segmenting each stack from one another with the only dependency being the core infrastructure stack (this current repo). 
 
 The goal of this setup is to be both scalable and portable; inspired by similar setups, I will be using NUCs and smaller smart switches so that this homelab can be setup anywhere without needing a large dedicated space (+reduced noise and power consumption).
 
@@ -37,16 +37,16 @@ Scalable and portable homelab setup split into 3 VMs/repos utilizing docker comp
 #### Servers
 
 - Lenovo Thinkcentre M700
-   - CPU: i5 @ 2.50GHz
+   - CPU: i5-6500T @ 2.50GHz
    - RAM: 32GB
    - SSD: 1TB
-   - OS: vSphere (need to check version #)
+   - OS: VMware ESXi-8.0.0-20513097-standard
 
 | Virtual Machine | Repository / Docker Compose Stack | OS | CPU | RAM | STORAGE
 |:--------------- | :-------------------------------: | -- | --- | --- | ------ |
-| prod-core-01 | wtlab-core-infra |
-| prod-monitor-01 | [monitor-stack](https://github.com/wtluong/wtlab-monitor-stack) |
-| prod-media-01 | media-stack |
+| prod-core-01 | wtlab-core-infra | Ubuntu 22.04.5 LTS | 2 vCPUs | 4 GB | 25 GB
+| prod-monitor-01 | [monitor-stack](https://github.com/wtluong/wtlab-monitor-stack) | Ubuntu 22.04.5 LTS | 4 vCPUs | 8 GB | 75 GB
+| prod-media-01 | media-stack | Ubuntu 22.04.5 LTS | 6 vCPUs | 8 GB | 400 GB
      
 The first NUC of this project, depending on the direction of this project this will likely be part of a NUC cluster.
 
@@ -92,7 +92,7 @@ The first NUC of this project, depending on the direction of this project this w
 
 ###  Prerequisites
 
-NOTE: This deployment was completed on **Ubuntu 24.04.3 LTS**; setup may vary if using another linux distribution/OS.
+NOTE: This deployment was completed on **Ubuntu 22.04.5 LTS**; setup may vary if using another linux distribution/OS.
 - [Docker Compose](https://docs.docker.com/compose/)
 - [Tailscale Account](https://login.tailscale.com/start) (not required, may skip if only accessing via LAN / other VPN method is being used)
 - Disable DNS to prevent Pi-hole port 53 conflict error (this stops Pi-hole from starting)
