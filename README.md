@@ -95,16 +95,24 @@ The first NUC of this project, depending on the direction of this project this w
 NOTE: This deployment was completed on **Ubuntu 22.04.5 LTS**; setup may vary if using another linux distribution/OS.
 - [Docker Compose](https://docs.docker.com/compose/)
 - [Tailscale Account](https://login.tailscale.com/start) (not required, may skip if only accessing via LAN / other VPN method is being used)
-- Disable DNS to prevent Pi-hole port 53 conflict error (this stops Pi-hole from starting)
-```
-sudo systemctl stop systemd-resolved
-sudo systemctl disable systemd-resolved
-sudo rm /etc/resolv.conf
+- Fix conflict with systemd-resolved and Pi-hole so it can bind to port 53
 
-echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
-echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolv.conf
+`sudo vi /etc/systemd/resolved.conf`
+
 ```
-#TODO: Automate this step; set `[Resolve] DNSStubListener=no` instead of nuking config (?)
+DNSStubListener=no
+DNS=127.0.0.1
+FallbackDNS=8.8.8.8 8.8.4.4
+```
+
+`sudo systemctl restart systemd-resolved`
+
+```
+sudo rm -f /etc/resolv.conf
+sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+```
+
+#TODO: Automate this step
   
   
 ### Deployment
