@@ -83,14 +83,14 @@ services:
     networks:
       - homelab
 
-  # Secure VPN (Primary Router Node)
-  tailscale-router:
+  # Secure VPN
+  tailscale:
     image: tailscale/tailscale:latest
-    container_name: tailscale-router
-    hostname: tailscale-router
+    container_name: tailscale
+    hostname: tailscale
     network_mode: "host"   # Needed for routing/exit node
     volumes:
-      - ./tailscale-router-data:/var/lib/tailscale
+      - ./tailscale-data:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - NET_ADMIN
@@ -101,29 +101,6 @@ services:
       TS_STATE_DIR: "/var/lib/tailscale"
       TS_EXTRA_ARGS: "--accept-dns=true --advertise-exit-node --advertise-routes=10.0.0.0/24"
 
-  # Backup node (redundant LAN access, no exit node)
-  tailscale-backup:
-    image: tailscale/tailscale:latest
-    container_name: tailscale-backup
-    hostname: tailscale-backup
-    network_mode: "host"           # Same as router to allow LAN routing
-    volumes:
-      - ./tailscale-backup-data:/var/lib/tailscale
-      - /dev/net/tun:/dev/net/tun
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    restart: unless-stopped
-    environment:
-      TS_AUTHKEY: "${TAILSCALE_BACKUP_AUTHKEY}"   # Separate auth key
-      TS_STATE_DIR: "/var/lib/tailscale"
-      TS_EXTRA_ARGS: "--accept-dns=true --advertise-routes=10.0.0.0/24"
-
 volumes:
   portainer_data:
   uptime-kuma:
-  tailscale-state:
-  # per-container state volumes
-  tailscale-router-data:
-  tailscale-backup-data:
-
