@@ -35,6 +35,8 @@ services:
       WEBPASSWORD: '${PIHOLE_PASSWORD}'
       PIHOLE_DNS_: '8.8.8.8;8.8.4.4'
       DNSMASQ_LISTENING: 'all'
+      DNSDOMAIN: '${DNS_DOMAIN}'
+      EXPAND_HOSTS: true
     volumes:
       - './pihole/etc-pihole:/etc/pihole'
       - './pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
