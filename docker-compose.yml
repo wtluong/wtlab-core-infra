@@ -1,5 +1,5 @@
 networks:
-  homelab:
+  core_homelab:
     driver: bridge
     ipam:
       driver: default
@@ -18,7 +18,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     networks:
-      - homelab
+      - core_homelab
 
   # DNS and Ad Blocking
   pihole:
@@ -41,7 +41,7 @@ services:
       - './pihole/etc-pihole:/etc/pihole'
       - './pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
     networks:
-      homelab:
+      core_homelab:
         ipv4_address: 172.20.0.10
 
   # Reverse Proxy
@@ -57,7 +57,7 @@ services:
       - './nginx-proxy-manager/data:/data'
       - './nginx-proxy-manager/letsencrypt:/etc/letsencrypt'
     networks:
-      - homelab
+      - core_homelab
 
   # Dashboard
   homer:
@@ -71,7 +71,7 @@ services:
     environment:
       - INIT_ASSETS=1
     networks:
-      - homelab
+      - core_homelab
 
   # Uptime Monitoring
   uptime-kuma:
@@ -83,7 +83,7 @@ services:
     volumes:
       - uptime-kuma:/app/data
     networks:
-      - homelab
+      - core_homelab
 
   # Secure VPN
   tailscale:
