@@ -115,11 +115,9 @@ sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 #TODO: Automate this step
 
-
 ### Deployment
 
 1. Rename [**.env.example**](https://github.com/wtluong/wtlab-core-infra/blob/main/.env.example) to **.env** and fill in the variables
-
 
 e.g.
 .env.example --> .env
@@ -130,6 +128,7 @@ TIMEZONE=
 
 # Pi-hole
 PIHOLE_PASSWORD=
+DNS_DOMAIN=
 
 # Tailscale
 TAILSCALE_AUTHKEY=
@@ -141,7 +140,6 @@ VM_IP=
 ```
 
 #TODO: Add more variables for automation
-
 
 2. Create custom dns file for pihole and dns entries for services
 
