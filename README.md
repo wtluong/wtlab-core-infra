@@ -103,7 +103,7 @@ NOTE: This deployment was completed on **Ubuntu 22.04.5 LTS**; setup may vary if
 DNSStubListener=no
 DNS=127.0.0.1
 FallbackDNS=8.8.8.8 8.8.4.4
-Domains=wtlan
+Domains=InsertDomainHere
 ```
 
 `sudo systemctl restart systemd-resolved`
