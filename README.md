@@ -4,7 +4,7 @@
 
 This project serves as documentation and the journey for my homelab setup; it will be continuously WIP as this lab will be for both personal use and learning new skills.
 
-Currently, this homelab is currently built on a NUC running VMware ESXi 8; tentatively, the expansion of this project will include adding a NAS for storage and additional NUC(s) for redundancy. This setup features using 3 different VMs / repos all using docker compose, segmenting each stack from one another with the only dependency being the core infrastructure stack (this current repo). 
+Currently, this homelab is currently built on a NUC running VMware ESXi 8; tentatively, the expansion of this project will include adding a NAS for storage and additional NUC(s) for redundancy. This setup features using 3 different VMs / repos all using docker compose, segmenting each stack from one another with the only dependency being the core infrastructure stack (this current repo).
 
 The goal of this setup is to be both scalable and portable; inspired by similar setups, I will be using NUCs and smaller smart switches so that this homelab can be setup anywhere without needing a large dedicated space (+reduced noise and power consumption).
 
@@ -47,7 +47,7 @@ Scalable and portable homelab setup split into 3 VMs/repos utilizing docker comp
 | prod-core-01 | wtlab-core-infra | Ubuntu 22.04.5 LTS | 2 vCPUs | 4 GB | 25 GB
 | prod-monitor-01 | [monitor-stack](https://github.com/wtluong/wtlab-monitor-stack) | Ubuntu 22.04.5 LTS | 4 vCPUs | 8 GB | 75 GB
 | prod-media-01 | media-stack | Ubuntu 22.04.5 LTS | 6 vCPUs | 8 GB | 400 GB
-     
+
 The first NUC of this project, depending on the direction of this project this will likely be part of a NUC cluster.
 
 
@@ -59,7 +59,7 @@ The first NUC of this project, depending on the direction of this project this w
 
 - xFinity WiFi Gateway
    - currently locked in using plan due to cheaper rates using their router vs own router, unfortunately restricts a lot of homelab capabilities e.g. segmented VLANs, setting custom DNS, port forwarding due to technical issues with the device; tentatively want to replace once on a new WiFi plan
-  
+
 #### Other
 
 - Leaving this category for additional appliances that might not fit under other categories
@@ -103,6 +103,8 @@ NOTE: This deployment was completed on **Ubuntu 22.04.5 LTS**; setup may vary if
 DNSStubListener=no
 DNS=127.0.0.1
 FallbackDNS=8.8.8.8 8.8.4.4
+Domains=wtlan
+
 ```
 
 `sudo systemctl restart systemd-resolved`
@@ -113,13 +115,11 @@ sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 ```
 
 #TODO: Automate this step
-  
-  
+
 ### Deployment
 
 1. Rename [**.env.example**](https://github.com/wtluong/wtlab-core-infra/blob/main/.env.example) to **.env** and fill in the variables
 
-   
 e.g.
 .env.example --> .env
 
@@ -129,6 +129,7 @@ TIMEZONE=
 
 # Pi-hole
 PIHOLE_PASSWORD=
+DNS_DOMAIN=
 
 # Tailscale
 TAILSCALE_AUTHKEY=
@@ -140,8 +141,7 @@ VM_IP=
 ```
 
 #TODO: Add more variables for automation
-  
-  
+
 2. Create custom dns file for pihole and dns entries for services
 
 e.g.
@@ -155,8 +155,8 @@ address=/homer.local/192.168.1.xxx
 ```
 
 #TODO: Create a **etc-dnsmasq.d.example** - once completed, this step will instead be: *2. **Rename etc-dnsmasq.d.example** to **etc-dnsmasq.d** and fill in the variables* ; potentially reference .env to reduce this step (?)
-  
-  
+
+
 ### Post-Deployment Config:
 
 #TODO: Go into more detail for each setup; have password setup in .env file if possible
@@ -199,7 +199,7 @@ address=/homer.local/192.168.1.xxx
    - Pi-hole: HTTP monitor on port 8080
    - Nginx PM: HTTP monitor on port 81
 ```
-  
+
 ## Roadmap
 
 - [x] [Core Infrastructure](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#overview)
@@ -210,5 +210,5 @@ address=/homer.local/192.168.1.xxx
 - [ ] Ansible for VM Management - **Future expansion**
 - [ ] Terraform for VM Deployment - **Future expansion**
 - [ ] Homelab Expansion - **Future expansion**
-   - [ ] NAS - Media & Backup Storage 
+   - [ ] NAS - Media & Backup Storage
    - [ ] Second NUC - High Availability
