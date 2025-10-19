@@ -12,6 +12,7 @@ The goal of this setup is to be both scalable and portable; inspired by similar 
 Scalable and portable homelab setup split into 3 VMs/repos utilizing docker compose, all dependent on the current repo which is the core infrastructure
 
 #TODO: Update; changing structure due to NUC resources, will be combining prod-core and prod-monitor VM's but keep docker composes segmented
+# add ufw rules here to unblock ports
 
 ### Table of Contents
 
