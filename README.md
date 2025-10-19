@@ -11,6 +11,9 @@ The goal of this setup is to be both scalable and portable; inspired by similar 
 #### TLDR:
 Scalable and portable homelab setup split into 3 VMs/repos utilizing docker compose, all dependent on the current repo which is the core infrastructure
 
+#TODO: Update; changing structure due to NUC resources, will be combining prod-core and prod-monitor VM's but keep docker composes segmented
+# add ufw rules here to unblock ports
+
 ### Table of Contents
 
 - [Overview](https://github.com/wtluong/wtlab-core-infra?tab=readme-ov-file#overview)
@@ -44,9 +47,9 @@ Scalable and portable homelab setup split into 3 VMs/repos utilizing docker comp
 
 | Virtual Machine | Repository / Docker Compose Stack | OS | CPU | RAM | STORAGE
 |:--------------- | :-------------------------------: | -- | --- | --- | ------ |
-| prod-core-01 | wtlab-core-infra | Ubuntu 22.04.5 LTS | 2 vCPUs | 4 GB | 25 GB
-| prod-monitor-01 | [monitor-stack](https://github.com/wtluong/wtlab-monitor-stack) | Ubuntu 22.04.5 LTS | 4 vCPUs | 8 GB | 75 GB
-| prod-media-01 | media-stack | Ubuntu 22.04.5 LTS | 6 vCPUs | 8 GB | 400 GB
+| prod-core-01 | wtlab-core-infra | Ubuntu 22.04.5 LTS | 1 vCPU | 4 GB | 25 GB
+| prod-monitor-01 | [monitor-stack](https://github.com/wtluong/wtlab-monitor-stack) | Ubuntu 22.04.5 LTS | 1 vCPU | 8 GB | 75 GB
+| prod-media-01 | media-stack | Ubuntu 22.04.5 LTS | 1 vCPUs | 8 GB | 400 GB
 
 The first NUC of this project, depending on the direction of this project this will likely be part of a NUC cluster.
 
@@ -103,8 +106,7 @@ NOTE: This deployment was completed on **Ubuntu 22.04.5 LTS**; setup may vary if
 DNSStubListener=no
 DNS=127.0.0.1
 FallbackDNS=8.8.8.8 8.8.4.4
-Domains=wtlan
-
+Domains=InsertDomainHere
 ```
 
 `sudo systemctl restart systemd-resolved`
@@ -112,6 +114,39 @@ Domains=wtlan
 ```
 sudo rm -f /etc/resolv.conf
 sudo ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+```
+
+- enable ports for everything in this deployment to work
+
+```
+# Allow SSH
+sudo ufw allow 22/tcp
+
+# Allow Pi-hole DNS from host and Docker network
+sudo ufw allow 53/tcp
+sudo ufw allow 53/udp
+sudo ufw allow from 172.20.0.0/16 to any port 53 proto udp
+sudo ufw allow from 172.20.0.0/16 to any port 53 proto tcp
+
+# Allow Prometheus/node-exporter/cAdvisor scraping
+sudo ufw allow 9100/tcp   # Node Exporter
+sudo ufw allow 8083/tcp   # cAdvisor
+sudo ufw allow from 172.20.0.0/16 to any port 9100 proto tcp
+sudo ufw allow from 172.20.0.0/16 to any port 8083 proto tcp
+
+# Allow dashboards
+sudo ufw allow 9000/tcp   # Portainer
+sudo ufw allow 8082/tcp   # Homer
+sudo ufw allow 3001/tcp   # Uptime Kuma
+sudo ufw allow 81/tcp     # Nginx Proxy Manager Admin
+sudo ufw allow 80/tcp     # Nginx Proxy Manager HTTP
+sudo ufw allow 443/tcp    # Nginx Proxy Manager HTTPS
+
+# Allow Tailscale (host network)
+sudo ufw allow 51820/udp
+
+# Enable UFW
+sudo ufw enable
 ```
 
 #TODO: Automate this step
