@@ -1,7 +1,7 @@
 # wtlab - Homelab Core Infrastructure
 
 ## Overview
-
+## TODO; redoing this as setup as changed
 This project serves as documentation and the journey for my homelab setup; it will be continuously WIP as this lab will be for both personal use and learning new skills.
 
 Currently, this homelab is currently built on a NUC running VMware ESXi 8; tentatively, the expansion of this project will include adding a NAS for storage and additional NUC(s) for redundancy. This setup features using 3 different VMs / repos all using docker compose, segmenting each stack from one another with the only dependency being the core infrastructure stack (this current repo).
